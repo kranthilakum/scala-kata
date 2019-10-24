@@ -11,7 +11,6 @@ val myCounter = new Counter
 myCounter.increment()
 print(myCounter.current())
 
-
 /**
   * Auxiliary constructor
   * Eliminate use of Auxiliary constructors by using default arguments

@@ -25,128 +25,116 @@
   * variables can be declared with val or var
   * val is similar to final variable in java. var is similar to non-final variable in java.
   * val can immutable whereas var is mutable. best practice is to use val and avoid var in FP like Scala as it's mutable
-  *
-  * @ val names = new Array[String](3)
-  * names: Array[String] = Array(null, null, null)
-  * @ names(0) = "Jack"
-  * @ names(1) = "Jane"
-  * @ names(2) = "James"
-  * @ for (i <- 0 to 2)
-  * print(names(i))
-  * JackJaneJames
-  * @ names = Array("a", "b", "c")
-  * cmd9.sc:1: reassignment to val
-  * val res9 = names = Array("a", "b", "c")
-  * ^
-  * Compilation Failed
-  *
-  * rather than using if-construct like if(x > 0) s = 1 else s = 1; use
-  * val s = if(x > 0) 1 else -1 // as it does not use any mutable variables
-  * @ val x = 5
-  * x: Int = 5
-  *
-  * @ val s = if(x > 0) 1 else -1
-  * s: Int = 1
-  *
-  * @ val y = if(x > 0) () else -1
-  * y: AnyVal = ()
+  */
+
+  val names = new Array[String](3) // names: Array[String] = Array(null, null, null)
+  names(0) = "Jack"
+  names(1) = "Jane"
+  names(2) = "James"
+  for (i <- 0 to 2)
+  print(names(i)) // JackJaneJames
+
+  // names = Array("a", "b", "c")
+  // cmd9.sc:1: reassignment to val
+  // res9 = names = Array("a", "b", "c")
+  // Compilation Failed
+
+  // rather than using if-construct like if(x > 0) s = 1 else s = 1; use
+  // val s = if(x > 0) 1 else -1 // as it does not use any mutable variables
+  val x = 5
+  val s = if(x > 0) 1 else -1
+  val y = if(x > 0) () else -1
+
+/**
   * () acts as a placeholder for no useful value
-  *
   * {} block contains a sequence of expressions
   * the value of the block is the value of the last expression
   * block that ends with an assignment results in a Unit value
-  *
-  * @ print('a')
-  * a
-  * @ print("abcdef")
-  * abcdef
-  * @ print("result: "+x)
-  * result: 5
-  * @ print(s"result: ${x}")
-  * result: 5
-  * @ print(f"result: ${x+0.5}%7.2f")
-  * result:    5.50
-  * @ print(raw"result: ${x}\n")
-  * result: 5\n
-  *
+  */
+  print('a')
+  // a
+  print("abcdef")
+  // abcdef
+  print("result: "+x)
+  // result: 5
+  print(s"result: ${x}")
+  // result: 5
+  print(f"result: ${x+0.5}%7.2f")
+  // result:    5.50
+  print(raw"result: ${x}\n")
+  // result: 5\n
+
+/**
   * read a line of input from console using readLine method of scala.io.StdIn class
-  *
   * every function is a value
-  * @ def max(x:Int, y:Int): Int = {
-  * if (x > y) x
-  * else y
-  * }
-  * defined function max
-  * @ max(1, 3)
-  * res24: Int = 3
-  * @ max(3, 1)
-  * res25: Int = 3
-  *
-  * @ def greet = print("Hello")
-  * defined function greet
-  * @ typeOf(greet)
-  * res27: reflect.runtime.package.universe.Type = TypeRef(ThisType(package scala), class Unit, List())
-  *
+  */
+  def max(x:Int, y:Int): Int = {
+   if (x > y) x
+   else y
+  }
+  // defined function max
+  max(1, 3)
+  // res24: Int = 3
+  max(3, 1)
+  // res25: Int = 3
+
+  def greet = print("Hello")
+  // defined function greet
+  typeOf(greet)
+  // res27: reflect.runtime.package.universe.Type = TypeRef(ThisType(package scala), class Unit, List())
+
+/**
   * printing to console output is a side effect
-  * side effect ???
-  *
+  * what is a side effect ???
   * recursive functions must have a return type. why???
   *
   * <<<<<<<<< default parameters >>>>>>>>
-  *
-  * @ def run(left:String="<-", right:String="->", forward:String="^", back:String="v") = left + right + forward + back
-  * defined function run
-  *
-  * @ run()
-  * res30: String = "<-->^v"
-  *
-  * @ run("l", "r", "f", "b")
-  * res31: String = "lrfb"
-  *
-  * @ run('a', 'b', 'c', 'd')
-  * cmd32.sc:1: type mismatch;
-  * found   : Char('a')
-  * required: String
-  *
-  * -------
-  *
+  */
+  def run(left:String="<-", right:String="->", forward:String="^", back:String="v") = left + right + forward + back
+  // defined function run
+  run()
+  // res30: String = "<-->^v"
+  run("l", "r", "f", "b")
+  // res31: String = "lrfb"
+  // run('a', 'b', 'c', 'd')
+  // cmd32.sc:1: type mismatch;
+  // found   : Char('a')
+  // required: String
+
+/**
   * variable number of arguments (*)
-  * @ def sum(args: Int*) = {
-  * var result = 0
-  * for(arg <- args) result += arg
-  * result
-  * }
-  * defined function sum
+  */
+  def sum(args: Int*) = {
+    var result = 0
+    for(arg <- args) result += arg
+    result
+  }
+  // defined function sum
+  sum(1, 2, 3, 4, 5)
+  // res33: Int = 15
+  sum(1, 2, 3)
+  // res34: Int = 6
+  sum(1 to 5:_*)
+  // res36: Int = 15
+
+/**
+  * recursiveSum
   *
-  * @ sum(1, 2, 3, 4, 5)
-  * res33: Int = 15
-  *
-  * @ sum(1, 2, 3)
-  * res34: Int = 6
-  *
-  * @ sum(1 to 5:_*)
-  * res36: Int = 15
-  *
-  * // recursiveSum
-  *
-  * --------
-  *
-  * a function without an equals = sign is a procedure. procedure returns no value, and you only call it for its side effect. Always write a function with equals sign that returns Unit rather than writing a procedure
-  *
-  * @ val r1 = 0 until 10
-  * r1: Range = Range(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
-  *
-  * @ r1.head
-  * res39: Int = 0
-  *
-  * @ r1.tail
-  * res40: Range = Range(1, 2, 3, 4, 5, 6, 7, 8, 9)
-  *
-  * @ val hd::tail = List(1,2,3,4,5)
-  * hd: Int = 1
-  * tail: List[Int] = List(2, 3, 4, 5)
-  *
-  * --------Lazy values
+  * a function without an equals = sign is a procedure.
+  * procedure returns no value, and you only call it for its side effect.
+  * Always write a function with equals sign that returns Unit rather than writing a procedure
+  */
+  val r1 = 0 until 10
+  // r1: Range = Range(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+  r1.head
+  // res39: Int = 0
+  r1.tail
+  // res40: Range = Range(1, 2, 3, 4, 5, 6, 7, 8, 9)
+  val hd::tail = List(1,2,3,4,5)
+  // hd: Int = 1
+  // tail: List[Int] = List(2, 3, 4, 5)
+
+/** --------Lazy values
   *
   * lazy val = 50 // initailisation of val is deferred until it is accessed for the first time
   * useful to delay costly initailisation
@@ -296,6 +284,9 @@
   * // map does not mutate jnames, but returns a new List
   * @ jnames.map(name => name + "y")
   * res93: List[String] = List("jamesy", "johny", "jacky")
+  *
+  * // for-comprehension is just syntactic sugar for the map call
+  * for (name <- jnames) yield name
   *
   * // returns a string with elements of the list separated by a separator
   * @ jnames.mkString(",")
@@ -479,6 +470,7 @@ println(raw"$name can eat $speed%2.2f burgers per minute")
 
 /**
   * Call by Value vs Call by Name
+  * https://stackoverflow.com/q/13337338/
   */
 def calledByValue(x: Long): Unit = {
   println(x)

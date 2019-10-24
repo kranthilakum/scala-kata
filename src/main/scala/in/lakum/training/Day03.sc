@@ -125,6 +125,7 @@ Bundle("Father's day special", 20.0)
 
 // sealed class
 // all subclasses of a sealed class must be defined in same file
+// supresses warnings ???
 // https://www.waitingforcode.com/scala-core/sealed-keyword-scala/read
 
 // option type
